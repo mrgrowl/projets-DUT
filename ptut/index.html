@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Générateur de Dobble</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script src='build/pdfmake.min.js'></script>
+    <script src='build/vfs_fonts.js'></script>
+
+
+</head>
+
+<nav>
+	
+	<span class="title">Générateur de Dobble</span>
+	<a href="https://forge.univ-lyon1.fr/p1909322/ptut" target="_blank" class="anav">Code Source</a>
+
+</nav>
+
+<body>
+
+	<div class="popupErreur" id="popupErr">
+		<div class="popupOverlay"></div>
+		<div class="popupContent">
+			<div class="popupClose" id="closeBtn">&times;</div>
+			
+			<p style="font-weight: bold; font-size: 125%;">⚠️ Votre jeu de cartes n'a pas pu être généré ⚠️</p>
+			<p style="font-style: italic;" id="popUpMsg"></p>
+		</div>
+		
+	</div>
+
+	<div class="explications">
+		<h1 class="explications">Explications  </h1>
+		<p class="explications">Dobble est un jeu de société inventé par Denis Blanchot, Jacques Cottereau, Play Factory, Jean-François Andréani, Toussain Benedetti, Guillaume Gille-Naves et Igor Polouchine, dans lequel les joueurs doivent trouver des dessins en commun entre deux cartes.<br>
+		Dans cette version, il vous est possible de générer votre propre jeu de carte en version PDF grâce à différents paramètres modifiables selon vos envies ! <br>
+		<b>Ce projet est entièrement open-source et chacun est autorisé à apporter des modifications.</b></p>
+	</div>
+
+	<div class="reglagegeneral">
+
+		<h1>Réglages général</h1>
+		<span>Type de symbole : </span>
+		<select id="typecarte">
+			<option>Texte / Nombre</option>
+			<option>Image</option>
+		</select>
+		<br>
+		<span>Nombre de symboles par carte : </span>
+		<select id="nbsymbole">
+			
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+		</select>
+		<br>
+		<span>Nombre de cartes :</span>
+		<select id="nbcartes">
+			<option value="12">12</option>
+			<option value="11">11</option>
+			<option value="10">10</option>
+			<option value="9">9</option>
+			<option value="8">8</option>
+			<option value="7">7</option>
+			<option value="6">6</option>
+			<option value="5">5</option>
+			<option value="4">4</option>
+			<option value="3">3</option>
+			<option value="2">2</option>
+			<option value="1">1</option>
+		</select>
+		<br>
+		<span>Forme des cartes :</span>
+		<select id="forme">
+			<option value="Rectangle">Rectangle</option>
+			<option value="Circulaire">Circulaire</option>
+		</select>
+		<br>
+		<span>Couleur des cartes : </span>
+		<input id="couleurCarte" type="color" value="#FFFFFF" name="">
+		<br><br>
+		<span>Future version :</span>
+		<input type="checkbox" id="checkFutureVersion" name="">
+		<br><br>
+		
+	</div>
+
+	<div id="reglagenextversion" class="reglagenextversion reglagetextuel invisible">
+		<h1>Réglages textuel (future version)</h1>
+		<span style="font-style: italic; font-weight: bold;">Ceci est une démonstration d'une future version, elle fonctionne uniquement avec 4 symboles et 12 cartes</span><br><br>
+		<span>Thème 1 : </span>
+		<input type="text" id="th1m1">
+		<input type="text" id="th1m2">
+		<input type="text" id="th1m3">
+		<input type="text" id="th1m4"><br>
+		<span>Thème 2 : </span>
+		<input type="text" id="th2m1">
+		<input type="text" id="th2m2">
+		<input type="text" id="th2m3">
+		<input type="text" id="th2m4"><br>
+		<span>Thème 3 : </span>
+		<input type="text" id="th3m1">
+		<input type="text" id="th3m2">
+		<input type="text" id="th3m3">
+		<input type="text" id="th3m4"><br>
+		<span>Thème 4 : </span>
+		<input type="text" id="th4m1">
+		<input type="text" id="th4m2">
+		<input type="text" id="th4m3">
+		<input type="text" id="th4m4"><br>
+		<span>Thème 5 : </span>
+		<input type="text" id="th5m1">
+		<input type="text" id="th5m2">
+		<input type="text" id="th5m3">
+		<input type="text" id="th5m4"><br>
+		<span>Thème 6 : </span>
+		<input type="text" id="th6m1">
+		<input type="text" id="th6m2">
+		<input type="text" id="th6m3">
+		<input type="text" id="th6m4"><br>
+		<span>Thème 7 : </span>
+		<input type="text" id="th7m1">
+		<input type="text" id="th7m2">
+		<input type="text" id="th7m3">
+		<input type="text" id="th7m4"><br>
+		<span>Thème 8 : </span>
+		<input type="text" id="th8m1">
+		<input type="text" id="th8m2">
+		<input type="text" id="th8m3">
+		<input type="text" id="th8m4"><br>
+		<span>Thème 9 : </span>
+		<input type="text" id="th9m1">
+		<input type="text" id="th9m2">
+		<input type="text" id="th9m3">
+		<input type="text" id="th9m4"><br>
+		<span>Thème 10: </span>
+		<input type="text" id="th10m1">
+		<input type="text" id="th10m2">
+		<input type="text" id="th10m3">
+		<input type="text" id="th10m4"><br>
+		<span>Thème 11: </span>
+		<input type="text" id="th11m1">
+		<input type="text" id="th11m2">
+		<input type="text" id="th11m3">
+		<input type="text" id="th11m4"><br>
+		<span>Thème 12: </span>
+		<input type="text" id="th12m1">
+		<input type="text" id="th12m2">
+		<input type="text" id="th12m3">
+		<input type="text" id="th12m4"><br>
+		<span>Thème 13: </span>
+		<input type="text" id="th13m1">
+		<input type="text" id="th13m2">
+		<input type="text" id="th13m3">
+		<input type="text" id="th13m4"><br>
+	</div>
+
+	<div id="reglagetextuel" class="reglagetextuel">
+		
+		<h1>Réglages textuel</h1>
+
+		<span>Liste des valeurs :</span><br>
+		<span>(1 valeur = 1 entrée)</span>
+		<br>
+
+		<div id="listmot" class="listmot">
+			<input type="text" id="mot1">
+			<input type="text" id="mot2">
+			<input type="text" id="mot3">
+			<input type="text" id="mot4">
+			<input type="text" id="mot5">
+			<input type="text" id="mot6">
+			<input type="text" id="mot7">
+			<input type="text" id="mot8">
+			<input type="text" id="mot9">
+			<input type="text" id="mot10">
+			<input type="text" id="mot11">
+			<input type="text" id="mot12">
+			<input type="text" id="mot13">
+		</div>
+
+		<br>
+		<div class="reglagefont">
+			<label for="tailleTexte">Taille du texte (entre 5 et 20) : </label>
+			<input type="number" id="tailleTexte" min="5" max="20">
+
+			<label for="police">Mélange des tailles : </label>
+			<input type="checkbox" id="melangeCartes" name="">
+
+
+			<label for="couleurTexte">Couleur :</label>
+			<input id="couleurTexte" type="color" name="">
+
+			<label for="police">Mélange des couleurs : </label>
+			<input type="checkbox" id="melangeCouleurTexte" name="">
+
+
+			
+		</div>
+
+	</div>
+
+	<div id="reglageimage" class="reglageimage invisible">
+
+		<h1>Réglage des images</h1>
+		<p>Veuillez entrer <b><span id="nbImages">13</span></b> images</p>
+		<input type="file" id="inputfile" multiple="true" name="" accept="image/*">
+		<p class="inputerror invisible" id="inputerror">Attention : Vous n'avez pas entré le bon nombre d'image.</p>
+
+		<div class="imgsprevi" id="imgsprevi"></div>
+		
+
+	</div>
+
+	<div id="generer">
+
+		<input type="button" class="btng" id="btnGenerer" value="Générer" name="">
+		
+	</div>
+
+	<div id="biblio">
+		<h1>Bibliothèque de cartes prédéfinis</h1>
+
+		<div id="predef">
+			<h2>Exemple 1</h2>
+			<img src="res/predef1.png">
+			<br>
+			<label>Nombre de symboles : </label>
+			<select>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+			</select>
+			<br>
+			<input type="button" value="Générer" name="">
+		</div>
+
+		<div id="predef">
+			<h2>Exemple 2</h2>
+			<img src="res/predef1.png">
+			<br>
+			<label>Nombre de symboles : </label>
+			<select>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+			</select>
+			<br>
+			<input type="button" value="Générer" name="">
+		</div>
+
+		<div id="predef">
+			<h2>Exemple 3</h2>
+			<img src="res/predef1.png">
+			<br>
+			<label>Nombre de symboles : </label>
+			<select>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+			</select>
+			<br>
+			<input type="button" value="Générer" name="">
+		</div>
+
+		<div id="predef">
+			<h2>Exemple 4</h2>
+			<img src="res/predef1.png">
+			<br>
+			<label>Nombre de symboles : </label>
+			<select>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+			</select>
+			<br>
+			<input type="button" value="Générer" name="">
+		</div>
+
+		
+
+
+	</div>
+</body>
+</html>

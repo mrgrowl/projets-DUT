@@ -10,5 +10,3 @@
  - Symfony 5  
  - Bootstrap 4 
  - Bootstrap-Icons
-
-Réalisé par **HARZELLI Youssef** *(Semestre 3)*

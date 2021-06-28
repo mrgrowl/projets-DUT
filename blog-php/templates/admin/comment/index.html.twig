@@ -1,0 +1,56 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Liste des commentaires{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3"> 
+
+    <h1 style="text-align: center;">Liste des commentaires</h1>
+
+    <div class="table-responsive">
+    <table class="table mt-3 table-striped">
+        <thead class="bg-danger">
+            <tr style="text-align: center">
+                <th>#</th>
+                <th>Utilisateur</th>
+                <th>Contenu</th>
+                <th>Créer le</th>
+                <th>Post</th>
+                <th>Validation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr style="text-align: center">
+                <td class="align-middle">{{ comment.id }}</td>
+                <td class="align-middle">{{ comment.username }}</td>
+                <td class="align-middle">{{ comment.content }}</td>
+                <td class="align-middle">{{ comment.createdAt ? comment.createdAt|date('d/m/Y à H:i') : '' }}</td> 
+                <td class="align-middle"><a target="_blank" href="{{ path('post_show', {'slug': comment.post.slug}) }}" style="text-align: center" class="btn btn-primary mt-2">Voir le post</a></div></td>
+                <td class="align-middle">{{ comment.valid ? '<i class="bi bi-hand-thumbs-up-fill text-success"></i>' : '<i class="bi bi-hand-thumbs-down-fill text-danger"></i>' }}</td>
+                <td >
+
+                    {% if comment.valid %}
+                        {{ include('admin/comment/_invalid_form.html.twig') }}
+                    {% else %}
+                        {{ include('admin/comment/_valid_form.html.twig') }}
+                    {% endif %}
+
+                    {{ include('admin/comment/_delete_form.html.twig') }}
+
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun commentaire n'a été trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+
+</div>
+{% endblock %}

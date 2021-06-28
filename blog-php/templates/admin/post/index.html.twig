@@ -1,0 +1,61 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Liste des posts{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3"> 
+    <h1 style="text-align: center;">Liste des posts</h1><hr>
+
+    {% for message in app.flashes('success') %}
+			<div style="position: fixed; bottom: 10px; right: 10px;">
+				<p>
+					<div class="alert alert-success fw-bolder" role="alert">{{message}}</div>
+				</p>
+			</div>
+	{% endfor %}
+    
+    <div class="table-responsive">
+    <table class="table mt-3 table-striped">
+        <thead class=" bg-danger">
+            <tr style="text-align: center">
+                <th>#</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Créer le</th>
+                <th>Modifé le</th>
+                <th>Publié le</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr style="text-align: center">
+                <td class="align-middle">{{ post.id }}</td>
+                <td class="align-middle">{{ post.title }}</td>
+                <td class="align-middle">{{ post.description }}</td>
+                <td class="align-middle">{{ post.createAt ? post.createAt|date('d/m/Y à H:i') : '' }}</td>
+                <td class="align-middle">{{ post.updatedAt ? post.updatedAt|date('d/m/Y à H:i') : '' }}</td>
+                <td class="align-middle">{{ post.publishedAt ? post.publishedAt|date('d/m/Y à H:i') : '' }}</td>
+                <td class="align-middle">
+
+                    <a class="btn btn-primary" href="{{ path('post_show', {'slug': post.slug}) }}">Afficher</a>
+                    <a class="btn btn-warning" href="{{ path('post_edit', {'id': post.id}) }}">Modifier</a>
+                    {{ include('admin/post/_delete_form.html.twig') }}
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucun post n'a été trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="float-right mt-3 mr-3 pb-3">
+        <a class="btn btn-danger" style="text-align: right;" href="{{ path('post_new') }}"><i class="bi bi-plus-circle-fill"></i> | Créer un post</a>
+    </div>
+</div>
+{% endblock %}

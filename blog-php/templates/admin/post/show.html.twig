@@ -1,0 +1,51 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3">
+
+    
+
+    <div class="card">
+        <div class="card-header">
+
+            {% for categorie in categories %}
+                <span class="badge badge-pill badge-secondary">{{categorie.name}}</span>
+            {% endfor %}
+            
+            <div class="float-right lg-3">Créer le {{ post.createAt ? post.createAt|date('d/m/Y à H:i') : '' }} 
+            {% if post.updatedAt != null %}
+             | Dernière modification le {{ post.updatedAt ? post.updatedAt|date('d/m/Y à H:i') : '' }}
+            {% endif %}
+             </div><br>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title" style="text-align:center">{{ post.title }}</h4> <hr> 
+            <p class="card-text">{{ post.description|nl2br }}</p>
+            <p class="card-text">{{ post.content|raw }}</p>
+        </div>
+    </div>
+
+
+    
+        <a class="btn btn-primary mt-3" href="{{ path('post_index') }}"><i class="bi bi-skip-backward-fill"></i> | Retour</a>
+        
+        <div class="float-right mt-3">
+        <a class="btn btn-warning" href="{{ path('post_edit', {'id': post.id}) }}"><i class="bi bi-pencil-fill"></i> | Modifier</a>
+
+        {{ include('admin/post/_delete_form.html.twig') }}
+        </div>
+
+        <h2 style="text-align: center" class="mt-3">Commentaires</h2>
+        <hr>
+        <ul class="list-group list-group-flush">
+            {% for comment in comments %}
+                <li class="list-group-item"><b>{{ comment.username }}</b>: {{ comment.content|nl2br }}  <div class="float-right"><span class="badge badge-danger badge-pill">{{ comment.createdAt|date('d/m/Y | H:i') }}</span></div></li>
+            {% endfor %}
+        </ul>
+
+    
+</div>
+
+{% endblock %}

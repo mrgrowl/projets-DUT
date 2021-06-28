@@ -1,0 +1,26 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Modification d'une catégorie{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3">
+    <h1 class="mb-3" style="text-align:center">Modifier la catégorie</h1><hr>
+
+    {{ include('admin/category/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a class="btn btn-primary"  href="{{ path('category_index') }}"><i class="bi bi-skip-backward-fill"></i> | Retour</a>
+
+    <div class="dropdown-divider mb-3"></div>
+    <h1 class="mb-3" style="text-align:center">Liste des posts contenant cette catégorie </h1><hr>
+
+    <ul class="list-group">
+    {% for post in posts %}
+        <li class="list-group-item">{{post.title}}</li>
+    {% else %}
+         <li class="list-group-item">Cette catégorie n'a été attribuée à aucun post.</li>
+    {% endfor %}
+    </ul>
+
+    
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Modifier un post{% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-3">
+    <h1 class="mb-3" style="text-align:center">Editer un Post</h1><hr>
+
+    {{ include('admin/post/_form.html.twig') }}
+
+
+    <a class="btn btn-primary" href="{{ path('post_index') }}"><i class="bi bi-skip-backward-fill"></i> | Retour</a>
+
+    </div>
+{% endblock %}

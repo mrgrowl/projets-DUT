@@ -1,0 +1,16 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Création d'une catégorie{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3">
+
+    <h1 style="text-align:center">Créer une catégorie</h1>
+    <div class="dropdown-divider mb-3"></div>
+
+    {{ include('admin/category/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('category_index') }}"><i class="bi bi-skip-backward-fill"></i> Retour</a>
+
+</div>
+{% endblock %}

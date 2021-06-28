@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('comment_invalid', {'id': comment.id}) }}" >
+    <input type="hidden" name="_token" value="{{ csrf_token('invalid' ~ comment.id) }}">
+    <button class="btn btn-warning mt-2">Invalider</button>
+</form>

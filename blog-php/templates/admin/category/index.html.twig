@@ -1,0 +1,54 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3"> 
+
+    <h1 style="text-align: center;">Liste des catégories</h1><hr>
+
+    {% for message in app.flashes('success') %}
+			<div style="position: fixed; bottom: 10px; right: 10px;">
+				<p>
+					<div class="alert alert-success fw-bolder" role="alert">{{message}}</div>
+				</p>
+			</div>
+	{% endfor %}
+    
+    <div class="table-responsive">
+    <table class="table mt-3 table-striped">
+        <thead class="bg-danger">
+            <tr style="text-align: center">
+                <th>#</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr style="text-align: center">
+                <td class="align-middle">{{ category.id }}</td>
+                <td class="align-middle">{{ category.name }}</td>
+                <td class="align-middle">
+                    <a class="btn btn-warning" href="{{ path('category_edit', {'id': category.id}) }}"><i class="bi bi-pencil-fill"></i> | Modifier</a><br>
+                    {{ include('admin/category/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune catégorie n'a été trouvée.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="float-right mt-3 mr-3 pb-3">
+        <a class="btn btn-danger" style="text-align: right;" href="{{ path('category_new') }}"><i class="bi bi-plus-circle-fill"></i> | Créer une Catégorie </a>
+        
+    </div>
+
+</div>
+{% endblock %}

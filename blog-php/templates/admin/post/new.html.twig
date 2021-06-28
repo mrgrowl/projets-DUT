@@ -1,0 +1,17 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Création d'un post{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3">
+
+    <h1 style="text-align:center">Créer un post</h1>
+    <div class="dropdown-divider mb-3"></div>
+    
+    {{ include('admin/post/_form.html.twig', {'button_label': 'Créer'}) }}
+        
+
+
+    <a class="btn btn-primary" href="{{ path('post_index') }}"><i class="bi bi-skip-backward-fill"></i> | Retour</a>
+</div>
+{% endblock %}

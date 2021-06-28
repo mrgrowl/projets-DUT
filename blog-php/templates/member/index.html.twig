@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MonBlog.com{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid"> 
+    
+    {{ render(controller('App\\Controller\\GlobalController::sideBar')) }}
+
+    <div class="row justify-content-end mt-3">
+    <div class=" col-md-12">
+    <h1 style="text-align:center">Derniers posts</h1><hr>
+
+        {% for post in posts %}
+            <div class="row">
+            <div class="col-md-12 mt-3">
+                <div class="card bg-light" style="text-align:center">
+                <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <p class="card-text">{{post.description}}</p>
+                    <a href="{{ path('user_show_post', {'slug': post.slug }) }}" class="btn btn-primary">En savoir plus</a>
+                </div>
+                </div>
+            </div>
+            </div>
+        {% else %}
+            <p>Aucun post trouvé.</p>
+        {% endfor %}
+
+        
+
+    <nav style="text-align: center">
+    <ul class="pagination justify-content-center mt-3">
+
+        {% if page != 1 %}
+            <li class="page-item"><a class="page-link" href="{{ path('user_index', {page: page - 1}) }}"><i class="bi bi-skip-backward-fill"></i></a></li>
+        {% else %}
+             <li class="page-item disabled"><a class="page-link" href="{{ path('user_index', {page: page }) }}"><i class="bi bi-skip-backward-fill"></i></a></li>
+        {% endif %}
+
+        
+        {% for i in 1.. ((totalPosts / 5) | round(0,'ceil')) %}
+            {% if i == page %}
+                <li class="page-item active"><a class="page-link" href="{{ path('user_index', {page: i}) }}">{{i}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="{{ path('user_index', {page: i}) }}">{{i}}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page != ((totalPosts / 5) | round(0,'ceil')) %}
+            <li class="page-item"><a class="page-link" href="{{ path('user_index', {page: page + 1}) }}"><i class="bi bi-skip-forward-fill"></i></a></li>
+        {% else %}
+            <li class="page-item disabled"><a class="page-link" href="{{ path('user_index', {page: page + 1}) }}"><i class="bi bi-skip-forward-fill"></i></a></li>
+        {% endif %}
+    </ul>
+    </nav>
+    
+    </div>
+    </div>
+
+</div>
+    
+{% endblock %}

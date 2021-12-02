@@ -1,6 +1,5 @@
 
-# projets-DUT
-**Projets réalisés durant mon DUT Informatique**
+# Projets réalisés durant mon DUT Informatique**
 
 ## [Projet tuteuré ](ptut/)
 
